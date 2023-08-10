@@ -11,9 +11,9 @@ import dash_bootstrap_components as dbc
 main_file_path = pathlib.Path(__file__)
 parent_folder = main_file_path.parent
 
-data_file = parent_folder / 'pl_player_hitting_stats.csv'
-data_file.is_file()
-player_hitting_stats = pd.read_csv(data_file)
+data_file1 = parent_folder / 'pl_player_hitting_stats.csv'
+data_file1.is_file()
+player_hitting_stats = pd.read_csv(data_file1)
 player_hitting_stats
 
 # Cleaning Data for Visualizations
