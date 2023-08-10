@@ -1,5 +1,6 @@
 # Team Hitting Page
 
+from pathlib import Path
 import pandas as pd
 import plotly.express as px
 import dash
@@ -7,7 +8,13 @@ from dash import Dash, html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 
 # Loading Data for Visualizations
-team_hitting_stats = pd.read_csv(r"C:\Users\Nick Triplett\OneDrive\Documents\Thrillville Thrillbillies\pl_team_hitting_stats.csv")
+main_file_path = pathlib.Path(__file__)
+parent_folder = main_file_path.parent
+
+data_file = parent_folder / 'pl_team_hitting_stats.csv'
+data_file.is_file()
+team_hitting_stats = pd.read_csv(data_file)
+team_hitting_stats
 
 # Dropping TOTALS Observations for Bar Chart
 team_hitting_stats.drop(17,inplace=True)
