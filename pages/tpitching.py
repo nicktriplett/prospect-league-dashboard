@@ -11,9 +11,9 @@ import dash_bootstrap_components as dbc
 main_file_path = pathlib.Path(__file__)
 parent_folder = main_file_path.parent
 
-data_file = parent_folder / 'pl_team_pitching_stats.csv'
-data_file.is_file()
-team_pitching_stats = pd.read_csv(data_file)
+data_file4 = parent_folder / 'pl_team_pitching_stats.csv'
+data_file4.is_file()
+team_pitching_stats = pd.read_csv(data_file4)
 team_pitching_stats
 
 # Dropping Observations for Bar Chart
