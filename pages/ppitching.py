@@ -1,12 +1,13 @@
 # Player Pitching Page
 
-import pathlib
-from pathlib import Path
+import os
 import pandas as pd
 import plotly.express as px
 import dash
 from dash import Dash, html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
+import pathlib
+from pathlib import Path
 
 # Loading Data for Visualizations
 main_file_path = pathlib.Path(__file__)
@@ -16,7 +17,6 @@ data_file3 = parent_folder / 'pl_player_pitching_stats.csv'
 data_file3.is_file()
 player_pitching_stats = pd.read_csv(data_file3)
 player_pitching_stats
-
 
 # Cleaning Data for Visualizations
 player_pitching_stats['Name'].replace('\n', '', regex=True, inplace=True)
