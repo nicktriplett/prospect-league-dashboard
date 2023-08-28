@@ -1,11 +1,12 @@
 # Player Hitting Page
 
+import os
 import pathlib
 from pathlib import Path
 import pandas as pd
 import plotly.express as px
 import dash
-from dash import Dash, html, dcc, Input, Output, State, callback, dash_table
+from dash import Dash, html, dcc, Input, Output, dash_table
 import dash_bootstrap_components as dbc
 
 # Loading Data for Visualizations
