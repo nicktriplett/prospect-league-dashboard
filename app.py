@@ -52,12 +52,12 @@ team_pitching_stats = pd.read_csv(data_file4)
 team_pitching_stats
 
 # Instantiating the Dashboard
-dashboard = Dash(__name__,external_stylesheets=[dbc.themes.JOURNAL],use_pages=True)
-server = dashboard.server
-dashboard.title = 'Prospect League Dashboard'
+app = Dash(__name__,external_stylesheets=[dbc.themes.JOURNAL],use_pages=True)
+server = app.server
+app.title = 'Prospect League Dashboard'
 
 # The Dashboard Layout
-dashboard.layout = dbc.Container(
+app.layout = dbc.Container(
     children=[
         # Page Navigation
         dbc.NavbarSimple(
@@ -97,5 +97,4 @@ dashboard.layout = dbc.Container(
 
 # run the app
 if __name__ == '__main__':
-    dashboard.run_server(debug=True)
-server=dashboard.server
+    app.run_server(debug=True)
