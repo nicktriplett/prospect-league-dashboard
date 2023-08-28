@@ -21,7 +21,7 @@ team_pitching_stats
 team_pitching_stats.drop(17,inplace=True)
 
 # Dropping Column for Bar Chart
-team_pitching_stats.drop(columns=['IP (Original)'],inplace=True)
+# team_pitching_stats.drop(columns=['IP (Original)'],inplace=True)
 
 # Creating and Setting an Index
 team_pitching_stats.loc[:,('Name')]
