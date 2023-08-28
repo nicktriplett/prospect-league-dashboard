@@ -31,30 +31,22 @@ data_file2 = os.path.join(pages_folder, 'pl_team_hitting_stats.csv')
 data_file3 = os.path.join(pages_folder, 'pl_player_pitching_stats.csv')
 data_file4 = os.path.join(pages_folder, 'pl_team_pitching_stats.csv')
 
-# main_file_path = pathlib.Path(__file__)
-# parent_folder = main_file_path.parent
-
-# data_file1 = parent_folder / 'pl_player_hitting_stats.csv'
-# data_file1.is_file()
 player_hitting_stats = pd.read_csv(data_file1)
 player_hitting_stats
 
-# data_file2 = parent_folder / 'pl_team_hitting_stats.csv'
 team_hitting_stats = pd.read_csv(data_file2)
 team_hitting_stats
 
-# data_file3 = parent_folder / 'pl_player_pitching_stats.csv'
 player_pitching_stats = pd.read_csv(data_file3)
 player_pitching_stats
 
-# data_file4 = parent_folder / 'pl_team_pitching_stats.csv'
 team_pitching_stats = pd.read_csv(data_file4)
 team_pitching_stats
 
 # Instantiating the Dashboard
-dashboard = Dash(__name__,external_stylesheets=[dbc.themes.JOURNAL],use_pages=True)
-server = dashboard.server
-dashboard.title = 'Prospect League Dashboard'
+app = Dash(__name__,external_stylesheets=[dbc.themes.JOURNAL],use_pages=True)
+server = app.server
+app.title = 'Prospect League Dashboard'
 
 # The Dashboard Layout
 app.layout = dbc.Container(
@@ -97,4 +89,4 @@ app.layout = dbc.Container(
 
 # run the app
 if __name__ == '__main__':
-    dashboard.run_server(debug=True)
+    app.run_server(debug=True)
