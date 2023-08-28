@@ -53,7 +53,7 @@ team_pitching_stats
 
 # Instantiating the Dashboard
 dashboard = Dash(__name__,external_stylesheets=[dbc.themes.JOURNAL],use_pages=True)
-server = app.server
+server = dashboard.server
 dashboard.title = 'Prospect League Dashboard'
 
 # The Dashboard Layout
