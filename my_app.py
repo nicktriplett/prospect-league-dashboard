@@ -1,14 +1,4 @@
-# Thrillville Thrillbillies Dashboard
-
-# import pathlib
-# from pathlib import Path
-# import pandas as pd
-# import plotly.express as px
-# import dash
-# from dash import Dash, html, dcc, Input, Output, dash_table
-# import dash_bootstrap_components as dbc
-
-# Thrillville Thrillbillies Dashboard
+# 2023 Prospect League Statistics Dashboard
 
 import os
 import pathlib
