@@ -22,6 +22,14 @@ team_pitching_stats
 # Dropping Observations for Bar Chart
 team_pitching_stats.drop(17,inplace=True)
 
+# Changing strings to integers/floats
+team_pitching_stats['IP'] = pd.to_numeric(team_pitching_stats['IP'], errors='coerce')
+team_pitching_stats['H'] = pd.to_numeric(team_pitching_stats['H'], errors='coerce')
+team_pitching_stats['R'] = pd.to_numeric(team_pitching_stats['R'], errors='coerce')
+team_pitching_stats['ER'] = pd.to_numeric(team_pitching_stats['ER'], errors='coerce')
+team_pitching_stats['BB'] = pd.to_numeric(team_pitching_stats['BB'], errors='coerce')
+team_pitching_stats['K'] = pd.to_numeric(team_pitching_stats['K'], errors='coerce')
+
 # Dropping Column for Bar Chart
 # team_pitching_stats.drop(columns=['IP (Original)'],inplace=True)
 
