@@ -204,7 +204,7 @@ layout=dbc.Container(
                     placeholder='Please select a team to review.',
                     optionHeight=25,
                     className='mt-1 mb-3',
-                    value=['Ryan Daly (THR)'],
+                    value=['Sebastian Gonzalez (IVY)'],
                     clearable=False
                 )
             ],
@@ -262,7 +262,7 @@ def charts(filter_value1,stat_selection1,stat_selection2,stat_selection3,player_
         stat_selection3 = ['ERA']
 
     if len(player_selection)==0:
-        player_selection = ['Ryan Daly (THR)']
+        player_selection = ['Sebastian Gonzalez (IVY)']
 
     # Making Batting Data Subset
     player_data_subset=player_pitching_stats1.loc[player_selection,stat_selection3].copy().reset_index() 
