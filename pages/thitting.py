@@ -76,7 +76,7 @@ layout=dbc.Container(
                         dict(label=x,value=x) for x in stat_list
                     ],
                     className='mt-1 mb-3',
-                    value='HR',
+                    value='OPS',
                     multi=False,
                     optionHeight=25,
                     clearable=False
@@ -96,7 +96,7 @@ layout=dbc.Container(
                     placeholder='Please select a team to review.',
                     optionHeight=25,
                     className='mt-1 mb-3',
-                    value=['Thrillville Thrillbillies'],
+                    value=['Chillicothe Paints'],
                     clearable=False
                 )
             ],
@@ -220,10 +220,10 @@ layout=dbc.Container(
 
 def charts(stat_selection,list_of_teams,stat_selection2,stat_selection3):
     if len(stat_selection)==0:
-        stat_selection = ['HR']
+        stat_selection = ['OPS']
 
     if len(list_of_teams)==0:
-        list_of_teams = ['Thrillville Thrillbillies']
+        list_of_teams = ['Chillicothe Paints']
 
     # Making Batting Data Subset
     batting_data_subset=team_hitting_stats.loc[list_of_teams,stat_selection].copy().reset_index()
