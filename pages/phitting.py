@@ -181,7 +181,7 @@ layout=dbc.Container(
                         dict(label=x,value=x) for x in batting_stat_list
                     ],
                     className='mt-1 mb-3',
-                    value='AVG',
+                    value='OPS',
                     multi=False,
                     optionHeight=25,
                     clearable=False
@@ -201,7 +201,7 @@ layout=dbc.Container(
                     placeholder='Please select a team to review.',
                     optionHeight=25,
                     className='mt-1 mb-3',
-                    value=['Jackson Lindsey (THR)'],
+                    value=['Tim Orr (CHI)'],
                     clearable=False
                 )
             ],
@@ -258,10 +258,10 @@ def charts(filter_value,stat_selection1,stat_selection2,stat_selection3,player_s
         filtered_data = player_hitting_stats1[player_hitting_stats1['PA/G'] >= 2.7]
     
     if len(stat_selection3)==0:
-        stat_selection3 = ['AVG']
+        stat_selection3 = ['OPS']
 
     if len(player_selection)==0:
-        player_selection = ['Jackson Lindsey (THR)']
+        player_selection = ['Tim Orr (CHI)']
 
     # Making Batting Data Subset
     player_data_subset=player_hitting_stats1.loc[player_selection,stat_selection3].copy().reset_index() 
