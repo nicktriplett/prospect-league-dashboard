@@ -100,7 +100,7 @@ layout=dbc.Container(
                     placeholder='Please select a team to review.',
                     optionHeight=25,
                     className='mt-1 mb-3',
-                    value=['Thrillville Thrillbillies'],
+                    value=['Chillicothe Paints'],
                     clearable=False
                 )
             ],
@@ -227,7 +227,7 @@ def charts(stat_selection4,list_of_teams1,stat_selection5,stat_selection6):
         stat_selection4 = ['ERA']
 
     if len(list_of_teams1)==0:
-        list_of_teams1 = ['Thrillville Thrillbillies']
+        list_of_teams1 = ['Chillicothe Paints']
 
     # Making Batting Data Subset
     pitching_data_subset=team_pitching_stats.loc[list_of_teams1,stat_selection4].copy().reset_index()
