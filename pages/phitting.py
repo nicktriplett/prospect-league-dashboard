@@ -54,8 +54,8 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Player Scatter Plot',className='text-center text-info mt-3 mb-2 fs-1'),
-    html.H3('Player Hitting Data Scatter Plot', className='text-dark text-center fs-2 mt-3 mb-0'),
+    html.H1('2023 Player Scatter Plot',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H3('Player Hitting Data Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
         dbc.Col(
@@ -898,4 +898,4 @@ def charts(filter_value,stat_selection1,stat_selection2,stat_selection3,player_s
         textfont_size=14
 )
 
-    return hitting_scatter_plot, batting_figure1,
+    return hitting_scatter_plot, batting_figure1
