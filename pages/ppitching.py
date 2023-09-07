@@ -67,7 +67,7 @@ layout=dbc.Container(
             children=[
                 dcc.Graph(
                     id='scatter_plot5',
-                    className='mt-3 mx-4 mb-3',
+                    className='mx-4 my-3',
                     config=dict(displayModeBar=False),
                 ),
             ],
