@@ -56,15 +56,15 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Player Scatter Plot',className='text-center text-dark mt-3 mb-2 fs-1'),
-    html.H3('Player Hitting Data Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
+    html.H1('2023 Prospect League Hitting Statistics Plot',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H3('Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
         dbc.Col(
             children=[
                 dcc.Graph(
                     id='scatter_plot',
-                    className='m-4',
+                    className='mx-4 my-3',
                     config=dict(displayModeBar=False),
                 ),
             ],
@@ -72,32 +72,49 @@ layout=dbc.Container(
             className='offset-md-1'
         )
     ]),
-    # User Commands
-        dcc.RadioItems(
-            id='filter-radio',
-            options=[
-                {'label':'All Prospect League Hitters','value':'all'},
-                {'label':'Qualified Prospect League Hitters','value':'greater_than_2.7'}
+    dbc.Row([
+        dbc.Col(
+            children=[
+                dcc.RadioItems(
+                    id='filter-radio',
+                    options=[
+                        {'label':'All Prospect League Hitters','value':'all'},
+                        {'label':'Qualified Prospect League Hitters','value':'greater_than_2.7'}
+                    ],
+                    value='all',
+                    labelStyle={'display': 'inline-block','margin-right': '10px'},
+                    inputStyle={'margin-right': '10px'}
+                )
             ],
-            value='all',
-    ),
-    dcc.Dropdown(
-        id='team-dropdown25',
-        options=[{'label': team, 'value': team} for team in unique_teams],
-        multi=True,  # Allow multiple team selection
-        value=unique_teams  # Default value (show all teams)
-    ),
+            className='offset-md-4'
+        )
+    ]),
+    dbc.Row([
+        dbc.Col(
+            children=[
+                html.P('Team(s) Selector',className='text-dark, text-center mb-2 fs-5'),
+                dcc.Dropdown(
+                    id='team-dropdown25',
+                    options=[{'label': team, 'value': team} for team in unique_teams],
+                    multi=True,
+                    value=unique_teams
+                ),
+            ],
+            width=10,
+            className='mt-4 offset-md-1 mb-3'
+        )
+    ]),
 
     dbc.Row([
         dbc.Col(
             children=[
-                html.P('Please select a statistical measure for the X-axis to compare players with.',className='text-center text-dark fs-5 mt-3')
+                html.P('Please select a statistical measure for the X-axis to compare players with.',className='text-center text-dark fs-5 mt-1')
             ],
             width=6
         ),
         dbc.Col(
             children=[
-                html.P("Please select a statistical measure for the Y-axis to compare players with.",className='text-center text-dark fs-5 mt-3')
+                html.P("Please select a statistical measure for the Y-axis to compare players with.",className='text-center text-dark fs-5 mt-1')
             ],
             width=6
         )
@@ -112,7 +129,7 @@ layout=dbc.Container(
                         dict(label=x,value=x) for x in batting_stat_list
                     ],
                     optionHeight=25,
-                    className='mt-1 mb-3',
+                    className='mt-0 mb-3',
                     value='OBP',
                     clearable=False
                 )
@@ -128,7 +145,7 @@ layout=dbc.Container(
                         dict(label=x,value=x) for x in batting_stat_list
                     ],
                     optionHeight=25,
-                    className='mt-1 mb-3',
+                    className='mt-0 mb-3',
                     value='SLG',
                     clearable=False
                 )
