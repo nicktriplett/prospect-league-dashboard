@@ -21,6 +21,11 @@ team_hitting_stats
 # Dropping TOTALS Observations for Bar Chart
 team_hitting_stats.drop(17,inplace=True)
 
+# Changing columns from object to numeric
+columns_to_convert = ['PA','AB','R','H','1B','2B','RBI','BB','BB%','K','K%','TTO','TTO%','SB','SB%','HBP','TB','XBH','GO','FO','RC']
+for column in columns_to_convert:
+    team_hitting_stats[column] = pd.to_numeric(team_hitting_stats[column], errors='coerce')
+
 # Creating and Setting an Index
 team_hitting_stats.loc[:,('Name')]
 team_hitting_stats.set_index('Name',inplace=True)
@@ -115,8 +120,8 @@ layout=dbc.Container(
     html.Br(),
 
     # Title and Dashboard Explanation
-    html.H1('2023 Team Scatter Plot',className='text-center text-info mt-3 mb-2 fs-1'),
-    html.H3('Team Hitting Data Scatter Plot', className='text-dark text-center fs-2 mt-3 mb-0'),
+    html.H1('2023 Team Scatter Plot',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H3('Team Hitting Data Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
         dbc.Col(
