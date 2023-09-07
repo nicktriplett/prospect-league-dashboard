@@ -64,6 +64,7 @@ app.layout = dbc.Container(
                     in_navbar=True,
                     label="Pitching Data"
                 ),
+                dbc.NavItem(dbc.NavLink('About',href='/about'))
             ],
             color='info',
             dark=True,
