@@ -1,14 +1,12 @@
-# Team Hitting Page
+# Team Pitching Page
 
 
-import os
 import pandas as pd
 import plotly.express as px
 import dash
 from dash import Dash, html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 import pathlib
-from pathlib import Path
 
 # Loading Data for Visualizations
 main_file_path = pathlib.Path(__file__)
@@ -29,9 +27,7 @@ team_pitching_stats['R'] = pd.to_numeric(team_pitching_stats['R'], errors='coerc
 team_pitching_stats['ER'] = pd.to_numeric(team_pitching_stats['ER'], errors='coerce')
 team_pitching_stats['BB'] = pd.to_numeric(team_pitching_stats['BB'], errors='coerce')
 team_pitching_stats['K'] = pd.to_numeric(team_pitching_stats['K'], errors='coerce')
-
-# Dropping Column for Bar Chart
-# team_pitching_stats.drop(columns=['IP (Original)'],inplace=True)
+team_pitching_stats['HBP'] = pd.to_numeric(team_pitching_stats['HBP'], errors='coerce')
 
 # Creating and Setting an Index
 team_pitching_stats.loc[:,('Name')]
@@ -127,8 +123,8 @@ layout=dbc.Container(
     html.Br(),
 
     # Title and Dashboard Explanation
-    html.H1('2023 Team Scatter Plot',className='text-center text-info mt-3 mb-2 fs-1'),
-    html.H3('Team Hitting Data Scatter Plot', className='text-dark text-center fs-2 mt-3 mb-0'),
+    html.H1('2023 Team Scatter Plot',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H3('Team Hitting Data Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
         dbc.Col(
