@@ -38,6 +38,7 @@ player_pitching_stats['BB/9'] = pd.to_numeric(player_pitching_stats['BB/9'], err
 player_pitching_stats['K'] = pd.to_numeric(player_pitching_stats['K'], errors='coerce')
 player_pitching_stats['K/BB'] = pd.to_numeric(player_pitching_stats['K/BB'], errors='coerce')
 player_pitching_stats['WHIP'] = pd.to_numeric(player_pitching_stats['WHIP'], errors='coerce')
+player_pitching_stats['FIP'] = pd.to_numeric(player_pitching_stats['FIP'], errors='coerce')
 
 # Creating Dataframe for Visualization
 player_pitching_stats1 = player_pitching_stats.drop(columns=['Name','#','Year','Pos'])
@@ -57,8 +58,8 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Player Scatter Plot',className='text-center text-info mt-3 mb-2 fs-1'),
-    html.H3('Player Pitching Data Scatter Plot', className='text-dark text-center fs-2 mt-3 mb-0'),
+    html.H1('2023 Player Scatter Plot',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H3('Player Pitching Data Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
         dbc.Col(
