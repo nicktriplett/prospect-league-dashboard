@@ -31,7 +31,7 @@ layout = html.Div(
         ),
         html.Div(
             children=[
-                'Image Source: ',
+                'Image and Favicon Source: ',
                 html.A(
                     'Prospect League',
                     href='https://d2o2figo6ddd0g.cloudfront.net/h/p/iwgjhe5gqqzrfm/primary-logo-newimage.png',className='text-info fs-4'
