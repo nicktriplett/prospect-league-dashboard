@@ -13,6 +13,7 @@ dash.register_page(__name__)
 
 layout = html.Div(
     children=[
+        style={'max-width': '1475px', 'margin': 'auto'},
         html.H1('About Me',className='text-center text-dark mt-3 mb-2 fs-1'),
         dbc.Row([
             dbc.Col(
