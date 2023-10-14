@@ -69,9 +69,6 @@ app.layout = dbc.Container(
             color='info',
             dark=True,
             style={'backgroundColor':'info','color':'black'},
-            ],
-            color='info',
-            dark=True,
         ),
 
         # Page Content
