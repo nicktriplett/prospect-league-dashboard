@@ -123,7 +123,7 @@ layout=dbc.Container(
     html.Br(),
 
     # Title and Dashboard Explanation
-    html.H1('2023 Team Scatter Plot',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H1('2023 Prospect League Team Pitching Statistics Plots',className='text-center text-dark mt-3 mb-2 fs-1'),
     html.H3('Team Hitting Data Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
