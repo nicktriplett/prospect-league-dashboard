@@ -64,7 +64,18 @@ app.layout = dbc.Container(
                     in_navbar=True,
                     label="Pitching Data"
                 ),
-                dbc.NavItem(dbc.NavLink('About',href='/about'))
+                dbc.DropdownMenu(
+                    children=[
+                        dbc.DropdownMenuItem(dbc.NavLink('About Me',href='/aboutme'))
+                    ],
+                    nav=True,
+                    in_navbar=True,
+                    label="About"
+                ),
+            ],
+            color='info',
+            dark=True,
+            style={'backgroundColor':'info','color':'black'},
             ],
             color='info',
             dark=True,
