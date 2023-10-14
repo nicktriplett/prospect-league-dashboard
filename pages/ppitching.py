@@ -59,7 +59,7 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Prospect League Pitching Statistics Plots',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H1('2023 Prospect League Player Pitching Statistics Plots',className='text-center text-dark mt-3 mb-2 fs-1'),
     html.H3('Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
