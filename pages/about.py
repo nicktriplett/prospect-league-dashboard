@@ -12,8 +12,8 @@ import dash_bootstrap_components as dbc
 dash.register_page(__name__)
 
 layout = html.Div(
+    style={'max-width': '1475px', 'margin': 'auto'},
     children=[
-        style={'max-width': '1475px', 'margin': 'auto'},
         html.H1('About Me',className='text-center text-dark mt-3 mb-2 fs-1'),
         dbc.Row([
             dbc.Col(
