@@ -41,8 +41,8 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Team Bar Chart',className='text-center text-dark mt-3 mb-2 fs-1'),
-    html.H3('Team Batting Data Bar Chart', className='text-info text-center fs-2 mt-3 mb-0'),
+    html.H1('2023 Prospect League Team Hitting Statistics Plots',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H3('Bar Chart', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
         dbc.Col(
@@ -120,8 +120,7 @@ layout=dbc.Container(
     html.Br(),
 
     # Title and Dashboard Explanation
-    html.H1('2023 Prospect League Team Hitting Statistics Plots',className='text-center text-dark mt-3 mb-2 fs-1'),
-    html.H3('Team Hitting Data Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
+    html.H3('Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
         dbc.Col(
