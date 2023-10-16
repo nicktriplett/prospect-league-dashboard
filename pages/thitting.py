@@ -22,6 +22,10 @@ team_hitting_stats
 team_hitting_stats.drop(17,inplace=True)
 
 # Changing columns from object to numeric
+team_hitting_stats['TTO%'] = team_hitting_stats['TTO%'].str.rstrip('%').astype(float)
+team_hitting_stats['BB%'] = team_hitting_stats['BB%'].str.rstrip('%').astype(float)
+team_hitting_stats['K%'] = team_hitting_stats['K%'].str.rstrip('%').astype(float)
+team_hitting_stats['SB%'] = team_hitting_stats['SB%'].str.rstrip('%').astype(float)
 columns_to_convert = ['PA','AB','R','H','1B','2B','RBI','BB','BB%','K','K%','TTO','TTO%','SB','SB%','HBP','TB','XBH','GO','FO','RC']
 for column in columns_to_convert:
     team_hitting_stats[column] = pd.to_numeric(team_hitting_stats[column], errors='coerce')
