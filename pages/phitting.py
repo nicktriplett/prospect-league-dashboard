@@ -166,8 +166,7 @@ layout=dbc.Container(
     html.Br(),
 
     # Title and Dashboard Explanation
-    html.H1('2023 Player Bar Chart',className='text-center text-dark mt-3 mb-2 fs-1'),
-    html.H3('Player Batting Data Bar Chart', className='text-info text-center fs-2 mt-3 mb-0'),
+    html.H3('Bar Chart', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
         dbc.Col(
