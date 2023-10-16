@@ -26,7 +26,10 @@ player_hitting_stats.drop(columns=['Name_With_Blanks'],inplace=True)
 
 player_hitting_stats.drop(485,inplace=True)
 
-# Convert columns to numeric
+# Convert columns to float/numeric
+player_hitting_stats['K%'] = player_hitting_stats['K%'].str.rstrip('%').astype(float)
+player_hitting_stats['BB%'] = player_hitting_stats['BB%'].str.rstrip('%').astype(float)
+player_hitting_stats['SB%'] = player_hitting_stats['SB%'].str.rstrip('%').astype(float)
 player_hitting_stats['G'] = pd.to_numeric(player_hitting_stats['G'], errors='coerce')
 player_hitting_stats['PA'] = pd.to_numeric(player_hitting_stats['PA'], errors='coerce')
 player_hitting_stats['PA/G'] = pd.to_numeric(player_hitting_stats['PA/G'], errors='coerce')
