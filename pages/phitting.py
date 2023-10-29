@@ -30,6 +30,7 @@ player_hitting_stats.drop(485,inplace=True)
 player_hitting_stats['K%'] = player_hitting_stats['K%'].str.rstrip('%').astype(float)
 player_hitting_stats['BB%'] = player_hitting_stats['BB%'].str.rstrip('%').astype(float)
 player_hitting_stats['SB%'] = player_hitting_stats['SB%'].str.rstrip('%').astype(float)
+player_hitting_stats['TTO%'] = player_hitting_stats['TTO%'].str.rstrip('%').astype(float)
 player_hitting_stats['G'] = pd.to_numeric(player_hitting_stats['G'], errors='coerce')
 player_hitting_stats['PA'] = pd.to_numeric(player_hitting_stats['PA'], errors='coerce')
 player_hitting_stats['PA/G'] = pd.to_numeric(player_hitting_stats['PA/G'], errors='coerce')
@@ -38,6 +39,11 @@ player_hitting_stats['K%'] = pd.to_numeric(player_hitting_stats['K%'], errors='c
 player_hitting_stats['SB%'] = pd.to_numeric(player_hitting_stats['SB%'], errors='coerce')
 player_hitting_stats['BABIP'] = pd.to_numeric(player_hitting_stats['BABIP'], errors='coerce')
 player_hitting_stats['RC'] = pd.to_numeric(player_hitting_stats['RC'], errors='coerce')
+player_hitting_stats['wOBA'] = pd.to_numeric(player_hitting_stats['wOBA'], errors='coerce')
+player_hitting_stats['wRAA'] = pd.to_numeric(player_hitting_stats['wRAA'], errors='coerce')
+player_hitting_stats['wRAA/PA'] = pd.to_numeric(player_hitting_stats['wRAA/PA'], errors='coerce')
+player_hitting_stats['wRC'] = pd.to_numeric(player_hitting_stats['wRC'], errors='coerce')
+player_hitting_stats['wRC+'] = pd.to_numeric(player_hitting_stats['wRC+'], errors='coerce')
 
 # Creating Dataframe for Visualization
 player_hitting_stats1 = player_hitting_stats.drop(columns=['Name','#','Year','Pos'])
@@ -47,7 +53,7 @@ player_hitting_stats1.set_index('Name (Team)',inplace=True)
 player_hitting_stats2=player_hitting_stats1.drop(columns=['Team'])
 
 # Sorting Lists for Dashboard Components
-batting_stat_list=[x for x in player_hitting_stats2.columns]
+batting_stat_list=[x for x in player_hitting_stats2.columnsif x not in ['Conference', 'Division']]
 batting_player_list = [x for x in player_hitting_stats2.index]
 unique_teams = player_hitting_stats1['Team'].unique()
 
