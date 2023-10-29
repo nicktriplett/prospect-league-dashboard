@@ -53,7 +53,7 @@ player_hitting_stats1.set_index('Name (Team)',inplace=True)
 player_hitting_stats2=player_hitting_stats1.drop(columns=['Team'])
 
 # Sorting Lists for Dashboard Components
-batting_stat_list=[x for x in player_hitting_stats2.columnsif x not in ['Conference', 'Division']]
+batting_stat_list=[x for x in player_hitting_stats2.columns if x not in ['Conference', 'Division']]
 batting_player_list = [x for x in player_hitting_stats2.index]
 unique_teams = player_hitting_stats1['Team'].unique()
 
