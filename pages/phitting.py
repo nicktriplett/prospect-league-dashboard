@@ -139,7 +139,7 @@ layout=dbc.Container(
                     ],
                     optionHeight=25,
                     className='mt-0 mb-3',
-                    value='OBP',
+                    value='PA',
                     clearable=False
                 )
             ],
@@ -155,7 +155,7 @@ layout=dbc.Container(
                     ],
                     optionHeight=25,
                     className='mt-0 mb-3',
-                    value='SLG',
+                    value='wRC+',
                     clearable=False
                 )
             ],
@@ -214,7 +214,7 @@ layout=dbc.Container(
                         dict(label=x,value=x) for x in batting_stat_list
                     ],
                     className='mt-1 mb-3',
-                    value='OPS',
+                    value='wRC+',
                     multi=False,
                     optionHeight=25,
                     clearable=False
@@ -298,7 +298,7 @@ def charts(filter_value,selected_teams,stat_selection1,stat_selection2,stat_sele
         filtered_data = player_hitting_stats1
 
     if len(stat_selection3)==0:
-        stat_selection3 = ['OPS']
+        stat_selection3 = ['wRC+']
 
     if len(player_selection)==0:
         player_selection = ['Tim Orr (CHI)']
