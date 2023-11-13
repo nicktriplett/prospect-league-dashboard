@@ -8,6 +8,7 @@ from dash import Dash, html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 import pathlib
 from pathlib import Path
+from dash_table import DataTable
 
 # Loading Data for Visualizations
 main_file_path = pathlib.Path(__file__)
@@ -26,17 +27,20 @@ team_hitting_stats['TTO%'] = team_hitting_stats['TTO%'].str.rstrip('%').astype(f
 team_hitting_stats['BB%'] = team_hitting_stats['BB%'].str.rstrip('%').astype(float)
 team_hitting_stats['K%'] = team_hitting_stats['K%'].str.rstrip('%').astype(float)
 team_hitting_stats['SB%'] = team_hitting_stats['SB%'].str.rstrip('%').astype(float)
-columns_to_convert = ['PA','AB','R','H','1B','2B','RBI','BB','BB%','K','K%','TTO','TTO%','SB','SB%','HBP','TB','XBH','GO','FO','RC']
+columns_to_convert = ['PA','AB','R','H','1B','2B','RBI','BB','K','TTO','SB','HBP','TB','XBH','GO','FO','RC']
 for column in columns_to_convert:
     team_hitting_stats[column] = pd.to_numeric(team_hitting_stats[column], errors='coerce')
 
 # Creating and Setting an Index
+team_hitting_stats1=team_hitting_stats.copy()
 team_hitting_stats.loc[:,('Name')]
 team_hitting_stats.set_index('Name',inplace=True)
 
 # Sorting Lists for Dashboard Components
 stat_list=[x for x in team_hitting_stats.columns]
 team_list = [x for x in team_hitting_stats.index]
+
+# Rank Function
 
 # Registering the Team Batting Page
 dash.register_page(__name__)
@@ -45,7 +49,7 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Prospect League Team Hitting Statistics Plots',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H1('2023 Prospect League Team Hitting Statistics Visualizations',className='text-center text-dark mt-3 mb-2 fs-1'),
     html.H3('Bar Chart', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
@@ -118,10 +122,6 @@ layout=dbc.Container(
     html.Br(),
     html.Br(),
     html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
 
     # Title and Dashboard Explanation
     html.H3('Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
@@ -190,6 +190,61 @@ layout=dbc.Container(
         )
     ]),
 
+    # Interactive Table
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+
+    html.H3('Interactive Table', className='text-info text-center fs-2 mt-3 mb-4'),
+
+    dbc.Row([
+        dbc.Col(
+            children=[
+                DataTable(
+                    id='datatable-interactivity',
+                    columns=[{"name": i, "id": i,"deletable": False} for i in team_hitting_stats1.columns], 
+                    data=team_hitting_stats1.to_dict('records'),
+                    sort_action="native",
+                    sort_mode="multi",
+                    page_action="native",
+                    page_current=0,
+                    page_size=len(team_hitting_stats1),
+                    style_table={'overflowX': 'auto'},
+                    style_cell={'textAlign': 'center'},
+                ),
+            ],
+            width=10,
+            className='offset-md-1'
+        )
+    ]),
+    
+    dbc.Row([
+        dbc.Col(
+            children=[
+                html.P('Please select a statistical measure for the X-axis to compare teams with.',className='text-center text-dark fs-5 mt-3')
+            ],
+        )
+    ]),
+
+    # Dropdown Box for Column Selection
+    dbc.Row([
+        dbc.Col(
+            children=[
+                dcc.Dropdown(
+                    id='column_dropdown',
+                    options=[
+                        {'label': col, 'value': col} for col in team_hitting_stats1.columns
+                    ],
+                    multi=True,
+                    placeholder='Please select a statistic(s) to review.',
+                    className='mt-1 mb-3',
+                ),
+            ],
+            width=4,
+            className='offset-md-4'
+        ),
+    ]),
 
     # Data Sources and Information
     html.Div(
@@ -216,25 +271,46 @@ layout=dbc.Container(
     fluid=True
 )
 
-# Section for the Callback
+# Callbacks
 @callback(
-    Output('bar_chart','figure'),
-    Output('scatter_plot1','figure'),
-    Input('stat_choice','value'),
-    Input('team_dropdown','value'),
-    Input('stat_dropdown3','value'),
-    Input('stat_dropdown4','value')
+    Output('datatable-interactivity', 'columns'),
+    Output('datatable-interactivity', 'data'),
+    Output('bar_chart', 'figure'),
+    Output('scatter_plot1', 'figure'),
+    Input('stat_choice', 'value'),
+    Input('team_dropdown', 'value'),
+    Input('stat_dropdown3', 'value'),
+    Input('stat_dropdown4', 'value'),
+    Input('datatable-interactivity', 'selected_columns'),
+    Input('column_dropdown', 'value'),
+    Input('datatable-interactivity', "derived_virtual_data"),
+    Input('datatable-interactivity', "derived_virtual_selected_rows"),
 )
-
-def charts(stat_selection,list_of_teams,stat_selection2,stat_selection3):
-    if len(stat_selection)==0:
+def update_data_and_table(
+        stat_selection, list_of_teams, stat_selection2, stat_selection3,
+        selected_columns, column_selection, rows, derived_virtual_selected_rows
+):
+    if len(stat_selection) == 0:
         stat_selection = ['OPS']
 
-    if len(list_of_teams)==0:
+    if len(list_of_teams) == 0:
         list_of_teams = ['Chillicothe Paints']
 
+    if derived_virtual_selected_rows is None:
+        derived_virtual_selected_rows = []
+
+    if column_selection is None:
+        column_selection = team_hitting_stats1.columns
+
+    if 'Name' not in column_selection:
+        column_selection.insert(0, 'Name')
+
+    # Update the DataTable based on selected columns
+    columns = [{"name": i, "id": i, "deletable": True, "selectable": True} for i in column_selection]
+    data = team_hitting_stats1[column_selection].to_dict('records')
+
     # Making Batting Data Subset
-    batting_data_subset=team_hitting_stats.loc[list_of_teams,stat_selection].copy().reset_index()
+    batting_data_subset = team_hitting_stats.loc[list_of_teams, stat_selection].copy().reset_index()
 
     # Batting Chart
     batting_figure=px.bar(
@@ -314,7 +390,7 @@ def charts(stat_selection,list_of_teams,stat_selection2,stat_selection3):
     batting_figure.update_traces(
         marker_line_color='black',
         marker_line_width=0.5,
-        textfont_size=14
+        textfont_size=14,
 )
     
     # Pitching Chart
@@ -398,6 +474,5 @@ def charts(stat_selection,list_of_teams,stat_selection2,stat_selection3):
         marker_line_width=1,
         textfont_size=14
 )
-
-
-    return batting_figure, hitting_scatter_plot1
+    
+    return columns, data, batting_figure, hitting_scatter_plot1
