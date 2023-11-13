@@ -53,10 +53,7 @@ player_hitting_stats1.loc[:,('Name (Team)')]
 player_hitting_stats1.set_index('Name (Team)',inplace=True)
 player_hitting_stats2=player_hitting_stats1.drop(columns=['Team'])
 
-player_hitting_stats3 = player_hitting_stats.copy()
-player_hitting_stats3['Name (Team)'] = player_hitting_stats3['Name'] + ' (' + player_hitting_stats3['Team'] + ')'
-player_hitting_stats3.loc[:,('Name (Team)')]
-player_hitting_stats3.drop(columns=['Name','Team'])
+player_hitting_stats3 = player_hitting_stats[player_hitting_stats['Qualified'] == "Yes"]
 
 # Sorting Lists for Dashboard Components
 batting_stat_list=[x for x in player_hitting_stats2.columns if x not in ['Conference', 'Division']]
@@ -250,7 +247,7 @@ layout=dbc.Container(
     html.Br(),
     html.Br(),
 
-    html.H3('Interactive Table', className='text-info text-center fs-2 mt-3 mb-4'),
+    html.H3('Interactive Table (Qualified Hitters)', className='text-info text-center fs-2 mt-3 mb-4'),
 
     dbc.Row([
         dbc.Col(
@@ -263,7 +260,7 @@ layout=dbc.Container(
                     sort_mode="multi",
                     page_action="native",
                     page_current=0,
-                    page_size=20,
+                    page_size=15,
                     style_table={'overflowX': 'auto'},
                     style_cell={'textAlign': 'center'},
                 ),
@@ -276,7 +273,7 @@ layout=dbc.Container(
     dbc.Row([
         dbc.Col(
             children=[
-                html.P('Please select a statistical measure for the X-axis to compare teams with.',className='text-center text-dark fs-5 mt-3')
+                html.P('Please select a statistical measure(s) for the X-axis to compare teams with.',className='text-center text-dark fs-5 mt-3')
             ],
         )
     ]),
