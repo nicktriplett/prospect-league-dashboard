@@ -48,10 +48,8 @@ player_pitching_stats1.loc[:,('Name (Team)')]
 player_pitching_stats1.set_index('Name (Team)',inplace=True)
 player_pitching_stats2=player_pitching_stats1.drop(columns=['Team'])
 
-player_pitching_stats3 = player_pitching_stats.copy()
-player_pitching_stats3['Name (Team)'] = player_pitching_stats3['Name'] + ' (' + player_pitching_stats3['Team'] + ')'
-player_pitching_stats3.loc[:,('Name (Team)')]
-player_pitching_stats3.drop(columns=['Name','Team'])
+player_pitching_stats3 = player_pitching_stats[player_pitching_stats['IP/G'] >= 0.76]
+
 
 # Sorting Lists for Dashboard Components
 batting_stat_list=[x for x in player_pitching_stats2.columns]
@@ -245,7 +243,7 @@ layout=dbc.Container(
     html.Br(),
     html.Br(),
 
-    html.H3('Interactive Table', className='text-info text-center fs-2 mt-3 mb-4'),
+    html.H3('Interactive Table (Qualified Pitchers)', className='text-info text-center fs-2 mt-3 mb-4'),
 
     dbc.Row([
         dbc.Col(
@@ -271,7 +269,7 @@ layout=dbc.Container(
     dbc.Row([
         dbc.Col(
             children=[
-                html.P('Please select a statistical measure for the X-axis to compare teams with.',className='text-center text-dark fs-5 mt-3')
+                html.P('Please select a statistical measure(s) for the X-axis to compare teams with.',className='text-center text-dark fs-5 mt-3 mb-0')
             ],
         )
     ]),
@@ -344,12 +342,12 @@ def charts(filter_value1,selected_teams1,stat_selection1,stat_selection2,stat_se
     if filter_value1 == 'all':
         filtered_data = player_pitching_stats1
     else:
-        filtered_data = player_pitching_stats1[player_pitching_stats1['IP/G'] >= 0.8]
+        filtered_data = player_pitching_stats1[player_pitching_stats1['IP/G'] >= 0.76]
     
     filtered_data = filtered_data[filtered_data['Team'].isin(selected_teams1)]
 
     if len(filtered_data) == 0 and filter_value1 == 'greater_than_0.8':
-        filtered_data = player_pitching_stats1[player_pitching_stats1['IP/G'] >= 0.8]
+        filtered_data = player_pitching_stats1[player_pitching_stats1['IP/G'] >= 0.76]
     elif len(filtered_data) == 0:
         filtered_data = player_pitching_stats1
     
