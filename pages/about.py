@@ -51,7 +51,7 @@ layout = html.Div(
             ],
             justify='center'
         ),
-        html.P("All of this leads me to who and where I am today. As I continue working towards my degree and bettering my analytical knowledge and skills, I remain committed and motivated towards my dream. Ultimately, I desire to become a data analyst of business analyst in the professional sports industry, where I can not only positively impact the organization that I work for, but also share my love of sports to others. I’m so thankful for God, as well as my family and friends, for establishing who I am today, and I’m excited to see what comes next!",className='text-center text-dark mt-3 mb-2 fs-6'),
+        html.P("All of this leads me to who and where I am today. As I continue working towards my degree and bettering my analytical knowledge and skills, I remain committed and motivated towards my dream. Ultimately, I desire to become a data/business analyst in the professional sports industry, where I can not only positively impact the organization that I work for, but also share my love of sports to others. I’m so thankful for God, as well as my family and friends, for establishing who I am today, and I’m excited to see what comes next!",className='text-center text-dark mt-3 mb-2 fs-6'),
         html.P("Colossians 3:23-24",className='text-center text-dark mt-3 mb-2 fs-6'),
     ]
 )
