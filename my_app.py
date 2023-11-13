@@ -34,7 +34,7 @@ team_pitching_stats = pd.read_csv(data_file4)
 team_pitching_stats
 
 # Instantiating the Dashboard
-app = Dash(__name__,external_stylesheets=[dbc.themes.JOURNAL],use_pages=True)
+app = Dash(__name__,external_stylesheets=[dbc.themes.JOURNAL],use_pages=True,suppress_callback_exceptions=True)
 server = app.server
 app.title = 'Prospect League Dashboard'
 
