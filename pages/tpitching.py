@@ -7,6 +7,7 @@ import dash
 from dash import Dash, html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 import pathlib
+from dash_table import DataTable
 
 # Loading Data for Visualizations
 main_file_path = pathlib.Path(__file__)
@@ -30,6 +31,7 @@ team_pitching_stats['K'] = pd.to_numeric(team_pitching_stats['K'], errors='coerc
 team_pitching_stats['HBP'] = pd.to_numeric(team_pitching_stats['HBP'], errors='coerce')
 
 # Creating and Setting an Index
+team_pitching_stats1=team_pitching_stats.copy()
 team_pitching_stats.loc[:,('Name')]
 team_pitching_stats.set_index('Name',inplace=True)
 
@@ -44,7 +46,7 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Prospect League Team Pitching Statistics Plots',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H1('2023 Prospect League Player Hitting Statistics Visualizations',className='text-center text-dark mt-3 mb-2 fs-1'),
     html.H3('Bar Chart', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
@@ -117,10 +119,6 @@ layout=dbc.Container(
     html.Br(),
     html.Br(),
     html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
 
     # Title and Dashboard Explanation
     html.H3('Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
@@ -189,6 +187,62 @@ layout=dbc.Container(
         )
     ]),
 
+    # Interactive Table
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+
+    html.H3('Interactive Table', className='text-info text-center fs-2 mt-3 mb-4'),
+
+    dbc.Row([
+        dbc.Col(
+            children=[
+                DataTable(
+                    id='datatable-interactivity4',
+                    columns=[{"name": i, "id": i,"deletable": False} for i in team_pitching_stats1.columns], 
+                    data=team_pitching_stats1.to_dict('records'),
+                    sort_action="native",
+                    sort_mode="multi",
+                    page_action="native",
+                    page_current=0,
+                    page_size=len(team_pitching_stats1),
+                    style_table={'overflowX': 'auto'},
+                    style_cell={'textAlign': 'center'},
+                ),
+            ],
+            width=10,
+            className='offset-md-1'
+        )
+    ]),
+    
+    dbc.Row([
+        dbc.Col(
+            children=[
+                html.P('Please select a statistical measure for the X-axis to compare teams with.',className='text-center text-dark fs-5 mt-3')
+            ],
+        )
+    ]),
+
+    # Dropdown Box for Column Selection
+    dbc.Row([
+        dbc.Col(
+            children=[
+                dcc.Dropdown(
+                    id='column_dropdown4',
+                    options=[
+                        {'label': col, 'value': col} for col in team_pitching_stats1.columns
+                    ],
+                    multi=True,
+                    placeholder='Please select a statistic(s) to review.',
+                    className='mt-1 mb-3',
+                ),
+            ],
+            width=4,
+            className='offset-md-4'
+        ),
+    ]),
+
 
     # Data Sources and Information
     html.Div(
@@ -217,20 +271,40 @@ layout=dbc.Container(
 
 # Section for the Callback
 @callback(
+    Output('datatable-interactivity4', 'columns'),
+    Output('datatable-interactivity4', 'data'),
     Output('bar_chart2','figure'),
     Output('scatter_plot3','figure'),
     Input('stat_choice1','value'),
     Input('team_dropdown1','value'),
     Input('stat_dropdown7','value'),
-    Input('stat_dropdown8','value')
+    Input('stat_dropdown8','value'),
+    Input('datatable-interactivity4', 'selected_columns'),
+    Input('column_dropdown4', 'value'),
+    Input('datatable-interactivity4', "derived_virtual_data"),
+    Input('datatable-interactivity4', "derived_virtual_selected_rows"),
 )
 
-def charts(stat_selection4,list_of_teams1,stat_selection5,stat_selection6):
+def charts(stat_selection4,list_of_teams1,stat_selection5,stat_selection6,selected_columns4, column_selection4, rows4, derived_virtual_selected_rows4):
     if len(stat_selection4)==0:
         stat_selection4 = ['ERA']
 
     if len(list_of_teams1)==0:
         list_of_teams1 = ['Chillicothe Paints']
+
+    if derived_virtual_selected_rows4 is None:
+        derived_virtual_selected_rows4 = []
+
+    if column_selection4 is None:
+        column_selection4 = team_pitching_stats1.columns
+
+    if 'Name' not in column_selection4:
+        column_selection4.insert(0, 'Name')
+
+    # Update the DataTable based on selected columns
+    columns4 = [{"name": i, "id": i, "deletable": True, "selectable": True} for i in column_selection4]
+    data4 = team_pitching_stats1[column_selection4].to_dict('records')
+
 
     # Making Batting Data Subset
     pitching_data_subset=team_pitching_stats.loc[list_of_teams1,stat_selection4].copy().reset_index()
@@ -399,4 +473,4 @@ def charts(stat_selection4,list_of_teams1,stat_selection5,stat_selection6):
 )
 
 
-    return pitching_figure, pitching_scatter_plot1
+    return columns4, data4, pitching_figure, pitching_scatter_plot1
