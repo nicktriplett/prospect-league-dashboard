@@ -165,7 +165,7 @@ layout=dbc.Container(
                     ],
                     optionHeight=25,
                     className='mt-1 mb-3',
-                    value='OBP',
+                    value='wRC+',
                     clearable=False
                 )
             ],
@@ -181,7 +181,7 @@ layout=dbc.Container(
                     ],
                     optionHeight=25,
                     className='mt-1 mb-3',
-                    value='SLG',
+                    value='Win %',
                     clearable=False
                 )
             ],
