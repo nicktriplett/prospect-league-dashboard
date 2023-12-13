@@ -54,6 +54,8 @@ player_hitting_stats1.set_index('Name (Team)',inplace=True)
 player_hitting_stats2=player_hitting_stats1.drop(columns=['Team'])
 
 player_hitting_stats3 = player_hitting_stats[player_hitting_stats['Qualified'] == "Yes"]
+player_hitting_stats3['Name (Team)'] = player_hitting_stats['Name'] + ' (' + player_hitting_stats['Team'] + ')'
+player_hitting_stats3.set_index('Name (Team)',inplace=True)
 
 # Sorting Lists for Dashboard Components
 batting_stat_list=[x for x in player_hitting_stats2.columns if x not in ['Conference', 'Division']]
@@ -68,7 +70,7 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Prospect League Hitting Statistics Visualizations',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H1('2023 Prospect League Player Hitting Statistics Visualizations',className='text-center text-dark mt-3 mb-2 fs-1'),
     html.H3('Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
