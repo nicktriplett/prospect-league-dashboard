@@ -48,7 +48,7 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Prospect League Player Hitting Statistics Visualizations',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H1('2023 Prospect League Team Pitching Statistics Visualizations',className='text-center text-dark mt-3 mb-2 fs-1'),
     html.H3('Bar Chart', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
@@ -164,7 +164,7 @@ layout=dbc.Container(
                     ],
                     optionHeight=25,
                     className='mt-1 mb-3',
-                    value='IP',
+                    value='ERA',
                     clearable=False
                 )
             ],
@@ -180,7 +180,7 @@ layout=dbc.Container(
                     ],
                     optionHeight=25,
                     className='mt-1 mb-3',
-                    value='ERA',
+                    value='Win %',
                     clearable=False
                 )
             ],
