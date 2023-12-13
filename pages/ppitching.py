@@ -52,6 +52,8 @@ player_pitching_stats1.set_index('Name (Team)',inplace=True)
 player_pitching_stats2=player_pitching_stats1.drop(columns=['Team'])
 
 player_pitching_stats3 = player_pitching_stats[player_pitching_stats['IP/G'] >= 0.76]
+player_pitching_stats3['Name (Team)'] = player_pitching_stats['Name'] + ' (' + player_pitching_stats['Team'] + ')'
+player_pitching_stats3.set_index('Name (Team)',inplace=True)
 
 
 # Sorting Lists for Dashboard Components
@@ -66,7 +68,7 @@ dash.register_page(__name__)
 layout=dbc.Container(
     children=[
     # Title and Dashboard Explanation
-    html.H1('2023 Prospect League Pitching Statistics Visualizations',className='text-center text-dark mt-3 mb-2 fs-1'),
+    html.H1('2023 Prospect League Player Pitching Statistics Visualizations',className='text-center text-dark mt-3 mb-2 fs-1'),
     html.H3('Scatter Plot', className='text-info text-center fs-2 mt-3 mb-0'),
     # The Graph
     dbc.Row([
@@ -157,7 +159,7 @@ layout=dbc.Container(
                     ],
                     optionHeight=25,
                     className='mt-0 mb-3',
-                    value='ERA',
+                    value='K',
                     clearable=False
                 )
             ],
@@ -229,7 +231,7 @@ layout=dbc.Container(
                         dict(label=x,value=x) for x in batting_player_list
                     ],
                     multi=True,
-                    placeholder='Please select a team to review.',
+                    placeholder='Please select a player to review.',
                     optionHeight=25,
                     className='mt-1 mb-3',
                     value=['Sebastian Gonzalez (IVY)'],
