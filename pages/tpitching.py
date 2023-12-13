@@ -19,6 +19,9 @@ team_pitching_stats
 
 # Dropping Observations for Bar Chart
 team_pitching_stats.drop(17,inplace=True)
+team_pitching_stats.drop(18,inplace=True)
+team_pitching_stats.drop(19,inplace=True)
+team_pitching_stats.drop(20,inplace=True)
 
 # Changing strings to integers/floats
 team_pitching_stats['IP'] = pd.to_numeric(team_pitching_stats['IP'], errors='coerce')
@@ -218,7 +221,7 @@ layout=dbc.Container(
     dbc.Row([
         dbc.Col(
             children=[
-                html.P('Please select a statistical measure for the X-axis to compare teams with.',className='text-center text-dark fs-5 mt-3')
+                html.P("Please select what statistics or measures you'd like to be included in this table.",className='text-center text-dark fs-5 mt-3')
             ],
         )
     ]),
