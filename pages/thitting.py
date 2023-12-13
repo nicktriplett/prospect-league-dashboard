@@ -222,7 +222,7 @@ layout=dbc.Container(
     dbc.Row([
         dbc.Col(
             children=[
-                html.P('Please select a statistical measure for the X-axis to compare teams with.',className='text-center text-dark fs-5 mt-3')
+                html.P("Please select what statistics or measures you'd like to be included in this table.",className='text-center text-dark fs-5 mt-3')
             ],
         )
     ]),
