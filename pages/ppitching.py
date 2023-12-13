@@ -26,7 +26,7 @@ player_pitching_stats['Name'].replace('\n', '', regex=True, inplace=True)
 player_pitching_stats.drop(522,inplace=True)
 
 # Dropping Column(s) for Visualizations
-player_pitching_stats.drop(columns=['Name_With_Blank'],inplace=True)
+# player_pitching_stats.drop(columns=['Name_With_Blank'],inplace=True)
 
 player_pitching_stats['App'] = pd.to_numeric(player_pitching_stats['App'], errors='coerce')
 player_pitching_stats['IP'] = pd.to_numeric(player_pitching_stats['IP'], errors='coerce')
@@ -40,6 +40,9 @@ player_pitching_stats['K'] = pd.to_numeric(player_pitching_stats['K'], errors='c
 player_pitching_stats['K/BB'] = pd.to_numeric(player_pitching_stats['K/BB'], errors='coerce')
 player_pitching_stats['WHIP'] = pd.to_numeric(player_pitching_stats['WHIP'], errors='coerce')
 player_pitching_stats['FIP'] = pd.to_numeric(player_pitching_stats['FIP'], errors='coerce')
+player_pitching_stats['LOB %'] = pd.to_numeric(player_pitching_stats['LOB %'], errors='coerce')
+player_pitching_stats['FIP-'] = pd.to_numeric(player_pitching_stats['FIP-'], errors='coerce')
+player_pitching_stats['E-F'] = pd.to_numeric(player_pitching_stats['E-F'], errors='coerce')
 
 # Creating Dataframe for Visualization
 player_pitching_stats1 = player_pitching_stats.drop(columns=['Name','#','Year','Pos'])
